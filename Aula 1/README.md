@@ -76,7 +76,7 @@ O próximo passo é estabelecer uma coneção com o MySQL. Para isso utilizamos 
  - login do MySQL (padrão `root`)
  -  senha do MySQL (padrão vazio)
  - nome do banco de dados (utilizamos `cadastro`)
-Após conectar, vamos conferir se a coneção foi bem sucedida do contrário o cadastro será interrompido e uma mensagem de erro apresentada. Sempre que abrimos uma conecção, é importante fechá-la, o que é feito pela função `ysqli_close`.
+Após conectar, vamos conferir se a coneção foi bem sucedida do contrário o cadastro será interrompido e uma mensagem de erro apresentada. Sempre que abrimos uma conecção, é importante fechá-la, o que é feito pela função `mysqli_close`.
 
 ```php
 <?php
