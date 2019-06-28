@@ -1,7 +1,9 @@
 # Linguagem de Programação III
 
 Colégio Pedro II - Campus Duque de Caxias
+
 Material de aula para a disciplina de Linguagem de Programação III
+
 Linguagens de Programação para Web - PHP
 
 O material é dividido em aulas, cada uma sobre um assunto. A cada aula os conhecimentos anteriores vão se somando, completando gradativamente um pequeno projeto exemplo.
