@@ -24,7 +24,7 @@
         }
     ?>
     <p>
-        <a href="cadastro.html">Cadastre-se</a>
+        <a href="formCadastro.php">Cadastre-se</a>
     </p>
 </form>
 </body>
