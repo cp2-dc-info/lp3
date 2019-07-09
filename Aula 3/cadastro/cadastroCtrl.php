@@ -18,9 +18,9 @@
 
     $erro = "";
 
-    if (cadastroUsuario($nome, $email $senha) == true) {
+    if (cadastraUsuario($nome, $email, $senha) == true) {
         session_unset();
-        header("Location: loginView.php");
+        header("Location: ../autenticacao/loginView.php");
         exit();
     } else {
         $erro = "E-mail indisponível";        

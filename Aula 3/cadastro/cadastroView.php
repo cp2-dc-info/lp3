@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Cadastro</h1>
-<form action="cadastro.php" method="post">
+<form action="cadastroCtrl.php" method="post">
     <p>
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome">
