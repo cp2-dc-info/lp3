@@ -6,7 +6,7 @@
 </head>
 <body>
 <h1>Cadastro</h1>
-<form action="cadastroCtrl.php" method="post">
+<form action="CadastroCtrl.php" method="post">
     <p>
         <label for="nome">Nome</label>
         <input type="text" name="nome" id="nome">
@@ -27,14 +27,16 @@
 
     <?php
         session_start();
-        if(array_key_exists('erro', $_SESSION) == true){
+        if(isset($_SESSION["erro"])) {
             $erro = $_SESSION["erro"];
-            echo "<br><b>$erro</b>";
+            foreach ($erro as $e)
+                echo "<br><b>$e</b>";
+            unset($_SESSION["erro"]);
         }
     ?>
     
     <p>
-        <a href="formLogin.php">Login</a>
+        <a href="../autenticacao/LoginView.php">Login</a>
     </p>
 </form>
 </body>

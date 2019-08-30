@@ -19,13 +19,15 @@
     <input type="submit" value="Enviar">
     <?php
         session_start();
-        if(array_key_exists('erro', $_SESSION) == true){
+        if(isset($_SESSION["erro"])) {
             $erro = $_SESSION["erro"];
-            echo "<br><b>$erro</b>";
+            foreach ($erro as $e)
+                echo "<br><b>$e</b>";
+            unset($_SESSION["erro"]);
         }
     ?>
     <p>
-        <a href="../cadastro/cadastroView.php">Cadastre-se</a>
+        <a href="../cadastro/CadastroView.php">Cadastre-se</a>
     </p>
 </form>
 </body>

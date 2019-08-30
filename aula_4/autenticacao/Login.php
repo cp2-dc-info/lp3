@@ -5,16 +5,26 @@
 
     class Login {
 
-        public static function autentica($email, $senha) {
+        public function autenticar($email, $senha) {
         
-            $conexao = ConnectionFactory::getConnection();
             $usuario = Usuario::buscar($email);
-            $conexao = null;
+
+            //die("chega aqui");
+            //exit();
         
-            if ($usuario != null && password_verify($senha, $usuario->senha))
-                return $usuario;
+            if (is_null($usuario)) {
+                die("user not found");
+                exit();
+            }
                 
-            return null;
+
+            if (!password_verify($senha, $usuario->getSenha())) {
+                die("password differ");
+                exit();
+            }
+                
+                
+            //return null;
         }   
     }
     

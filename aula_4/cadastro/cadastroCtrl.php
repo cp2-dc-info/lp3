@@ -1,32 +1,58 @@
 <?php
     
-    require "cadastroUsuario.php";
+    require "Cadastro.php";
 
-    $nome = $_POST["nome"];
-    $email = $_POST["email"];
-    $senha = $_POST["senha"];
-    $confirmaSenha = $_POST["confirmaSenha"];
+    class CadastroCtrl {
 
-    session_start();
+        public function doPost() {
+            $nome = $_POST["nome"];
+            $email = $_POST["email"];
+            $senha = $_POST["senha"];
+            $confirmaSenha = $_POST["confirmaSenha"]; 
 
-    if ($senha != $confirmaSenha) {    
-        $erro = "As senhas não coincidem";        
-        $_SESSION["erro"] = $erro;
-        header("Location: cadastroView.php");
-        exit();
+            $this->cadastrarCliente($nome, $email, $senha, $confirmaSenha);
+        }
+
+        public function cadastrarCliente($nome, $email, $senha, $confirmaSenha) {
+            session_start();
+
+            if (empty($nome))
+                $erro[] = "O campo nome é obrigatório";
+
+            if (empty($email))
+                $erro[] = "O campo email é obrigatório";
+            
+            if (empty($senha))
+                $erro[] = "O campo senha é obrigatório";  
+
+            if ($senha != $confirmaSenha)
+                $erro[] = "As senhas não coincidem"; 
+
+            if (!empty($erro)) {
+                $_SESSION["erro"] = $erro;
+                header("Location: CadastroView.php");
+                exit();
+            }
+        
+            $model = new Cadastro();
+            if ($model->cadastrarCliente($nome, $email, $senha)) {
+                session_unset();
+                header("Location: ../autenticacao/LoginView.php");
+                exit();
+            } else {
+                $erro[] = "E-mail indisponível";
+                header("Location: CadastroView.php");
+                exit();
+            }
+        }
     }
 
-    $erro = "";
-
-    if (cadastraUsuario($nome, $email, $senha) == true) {
-        session_unset();
-        header("Location: ../autenticacao/loginView.php");
-        exit();
+    
+    $controller = new CadastroCtrl();
+    if(!empty($_POST)) {
+        $controller->doPost();
     } else {
-        $erro = "E-mail indisponível";        
-        $_SESSION["erro"] = $erro;
-        header("Location: cadastroView.php");
+        header('Location: CadastroView.php');
         exit();
     }
-
 ?>

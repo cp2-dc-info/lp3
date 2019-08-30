@@ -9,10 +9,10 @@
 
         public static function getConnection() {
 
-            $conexao = null;
+            $conn = null;
 
             try {
-                $conn = new PDO("mysql:host=$servidor;dbname=$banco", $usuario, $senha);
+                $conn = new PDO("mysql:host=" . self::$servidor . ";dbname=" . self::$banco, self::$usuario, self::$senha);
                 // set the PDO error mode to exception
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
@@ -20,7 +20,7 @@
                 die("Falha ao conectar: " . $e->getMessage());
             }
 
-            return $conexao;
+            return $conn;
         }
 
     }

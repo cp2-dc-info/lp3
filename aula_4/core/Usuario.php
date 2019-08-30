@@ -41,35 +41,65 @@
             $this->email = $email;
         }
 
-        public function salvar() {
+        public function getSenha() {
+            return $this->senha;
+        }
 
+        public function setSenha($senha) {
+            $this->senha = $senha;
+        }
+
+        public function salvar() {
+            $conn = ConnectionFactory::getConnection();
+
+            // insert
+            //if (is_null($this->id)) {
+
+                try {
+                    $stmt = $conn->prepare('INSERT INTO usuario (nome, email, senha) VALUES (:nome, :email, :senha)');
+                    $stmt->bindValue(':nome', $this->getNome());
+                    $stmt->bindvalue(':email', $this->getEmail());
+                    $stmt->bindValue(':senha', $this->getSenha());
+
+                    $stmt->execute();
+                    $this->setId($conn->lastInsertId());
+
+                } catch( PDOExecption $e ) { 
+                    die("Erro ao efetuar cadastro! " . $e->getMessage());
+                } 
+                $conn = null;
+           //} // update
+            //else {
+
+            //}            
         }
 
         public static function buscar($email) {
 
+            
             $conn = ConnectionFactory::getConnection();
-
-            $stmt = $conn->prepare('SELECT id,nome,email,senha FROM students WHERE email = :email');
-            $stmt->bindParam(':email', $email);
+            $stmt = $conn->prepare("SELECT id,nome,email,senha FROM usuario WHERE email = :email");
 
             try {
-                if ($row = $stmt->fetch()) {
+                
+                $stmt->execute([':email' => $email]);
 
-                    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                if ($row = $stmt->fetch()) {
                     
-                    $usuario = new Usuario();
-                    $usuario->setId($row['id']);
-                    $usuario->setNome($row['nome']);
-                    $usuario->setEmail($row['email']);
-                    $usuario->setSenha($row['senha']);
-    
+                    $usuario = new Usuario($row['nome'], $row['email'], $row['senha']);
+                    $usuario->setId($row['id']); 
                     return $usuario;
                 }
+                return null;
+            
             } catch (PDOException $e) {
                 die("Erro ao buscar usuário" . $e->getMessage());
+                exit();
+            } finally {
+                $conn = null;
             }
             
-            return null;
+            
         }
     }
 
