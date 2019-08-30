@@ -89,9 +89,10 @@
                     $usuario = new Usuario($row['nome'], $row['email'], $row['senha']);
                     $usuario->setId($row['id']); 
                     return $usuario;
+                } else {
+                    return null;
                 }
-                return null;
-            
+                
             } catch (PDOException $e) {
                 die("Erro ao buscar usuário" . $e->getMessage());
                 exit();

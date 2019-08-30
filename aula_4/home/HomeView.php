@@ -6,14 +6,14 @@
 
     <?php
         session_start();
-        if(isset($_SESSION['usuario'])) {
-            $usuario = $_SESSION['usuario'];
+        if(isset($_SESSION['nome'])) {
+            $nome = $_SESSION['nome'];
         } else {
             header('Location: ../autenticacao/LoginView.php');
         }
     ?>
 
-    <p> Seja bem vindo <?php echo $usuario->getNome?>!</p> 
+    <p> Seja bem vindo <?php echo $nome?>!</p> 
     <a href='../autenticacao/LogoutAction.php'>Sair</a>
     
     </body>

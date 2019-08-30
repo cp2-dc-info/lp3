@@ -16,8 +16,9 @@
             $model = new Login();
             if ($usuario = $model->autenticar($email, $senha)) {
                 session_unset();
-                $_SESSION["usuario"] = $usuario;
-                header("Location: home.php");
+                $_SESSION["email"] = $usuario->getEmail();
+                $_SESSION["nome"] = $usuario->getNome();
+                header("Location: ../Home/HomeView.php");
                 exit();
             }
             else {

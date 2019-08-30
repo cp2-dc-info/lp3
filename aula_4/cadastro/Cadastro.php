@@ -12,10 +12,10 @@
                 $hash = password_hash($senha, PASSWORD_DEFAULT);
                 $usuario = new Usuario($nome, $email, $hash);
                 $usuario->salvar();
-                return $usuario;
+                return true;
             } 
 
-            return null;
+            return false;
         }
     }    
     

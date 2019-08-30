@@ -8,23 +8,17 @@
         public function autenticar($email, $senha) {
         
             $usuario = Usuario::buscar($email);
-
-            //die("chega aqui");
-            //exit();
         
             if (is_null($usuario)) {
-                die("user not found");
-                exit();
+                return null;
             }
                 
 
             if (!password_verify($senha, $usuario->getSenha())) {
-                die("password differ");
-                exit();
+                return null;
             }
-                
-                
-            //return null;
+
+            return $usuario;
         }   
     }
     

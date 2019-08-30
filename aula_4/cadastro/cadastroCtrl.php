@@ -36,11 +36,11 @@
         
             $model = new Cadastro();
             if ($model->cadastrarCliente($nome, $email, $senha)) {
-                session_unset();
                 header("Location: ../autenticacao/LoginView.php");
                 exit();
             } else {
                 $erro[] = "E-mail indisponível";
+                $_SESSION["erro"] = $erro;
                 header("Location: CadastroView.php");
                 exit();
             }
